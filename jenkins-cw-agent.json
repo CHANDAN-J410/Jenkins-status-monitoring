@@ -1,0 +1,24 @@
+{
+"agent": {
+"run_as_user": "root","metrics_collection_interval": 60,"log_file": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
+},
+  "metrics": {
+    "namespace": "jenkins-cw",
+    "append_dimensions": {
+      "InstanceId": "${aws:InstanceId}"
+    },
+    "metrics_collected": {
+      "procstat": [
+        {
+          "pattern": "jenkins",
+          "measurement": [
+            "cpu_usage",
+            "memory_rss",
+            "memory_vms"
+          ],
+          "metrics_collection_interval": 60
+        }
+      ]
+    }
+  }
+}
